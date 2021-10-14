@@ -10,77 +10,36 @@ class XylophoneApp extends StatelessWidget {
     player.play('note$soundNumber.wav');
   }
 
+  Expanded buildKey({int keyNote, Color kColor}) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(1.0),
+        child: TextButton(
+          style: TextButton.styleFrom(backgroundColor: kColor),
+          onPressed: () {
+            playSound(keyNote);
+          },
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: TextButton(
-                  style: TextButton.styleFrom(backgroundColor: Colors.red),
-                  onPressed: () {
-                    playSound(1);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: TextButton(
-                  style: TextButton.styleFrom(backgroundColor: Colors.orange),
-                  onPressed: () {
-                    playSound(2);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: TextButton(
-                  style: TextButton.styleFrom(backgroundColor: Colors.yellow),
-                  onPressed: () {
-                    playSound(3);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: TextButton(
-                  style:
-                      TextButton.styleFrom(backgroundColor: Colors.lightGreen),
-                  onPressed: () {
-                    playSound(4);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: TextButton(
-                  style: TextButton.styleFrom(backgroundColor: Colors.green),
-                  onPressed: () {
-                    playSound(5);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: TextButton(
-                  style: TextButton.styleFrom(backgroundColor: Colors.teal),
-                  onPressed: () {
-                    playSound(6);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: TextButton(
-                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
-                  onPressed: () {
-                    playSound(7);
-                  },
-                ),
-              ),
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              buildKey(keyNote: 1, kColor: Colors.red),
+              buildKey(keyNote: 2, kColor: Colors.orange),
+              buildKey(keyNote: 3, kColor: Colors.yellow),
+              buildKey(keyNote: 4, kColor: Colors.green),
+              buildKey(keyNote: 5, kColor: Colors.teal),
+              buildKey(keyNote: 6, kColor: Colors.blue),
+              buildKey(keyNote: 7, kColor: Colors.purple),
             ],
           ),
         ),
