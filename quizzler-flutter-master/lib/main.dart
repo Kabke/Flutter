@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'quizBrain.dart';
 
 void main() => runApp(Quizzler());
 
@@ -28,17 +28,7 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  List<Question> questionBank = [
-    Question(q: 'You can  lead a cow down stairs but not up stairs.', a: false),
-    Question(q: 'Frodo is more powerful than Gandalf.', a: false),
-    Question(q: 'Tyrone Biggums is a pot head.', a: false),
-    Question(
-        q: 'Terminator 2 is better than the original Terminator.', a: true),
-    Question(q: 'Toy Story was directed by George Lucas.', a: false),
-    Question(q: 'R2D2 is a turbochad.', a: true),
-    Question(q: 'Airfrying is a hoax.', a: false),
-    Question(q: 'Piano is just a 72-piece drum set.', a: true)
-  ];
+  QuizBrain quizBrain = QuizBrain();
 
   Icon wrongAnswer = Icon(
     Icons.close,
@@ -93,7 +83,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked true.
                 bool correctAnswer =
-                    questionBank[questionNumber].questionAnswer;
+                    quizBrain.questionBank[questionNumber].questionAnswer;
 
                 if (true == correctAnswer) {
                   scoreKeeper.add(rightAnswer);
@@ -123,7 +113,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked false.
                 bool correctAnswer =
-                    questionBank[questionNumber].questionAnswer;
+                    quizBrain.questionBank[questionNumber].questionAnswer;
 
                 if (false == correctAnswer) {
                   scoreKeeper.add(rightAnswer);
