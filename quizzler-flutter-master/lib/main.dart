@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() => runApp(Quizzler());
 
@@ -26,11 +27,30 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.'
+
+  List<Question> questionBank = [
+    Question(q: 'You can  lead a cow down stairs but not up stairs.', a: false),
+    Question(q: 'Frodo is more powerful than Gandalf.', a: false),
+    Question(q: 'Tyrone Biggums is a pot head.', a: false),
+    Question(
+        q: 'Terminator 2 is better than the original Terminator.', a: true),
+    Question(q: 'Toy Story was directed by George Lucas.', a: false),
+    Question(q: 'R2D2 is a turbochad.', a: true),
+    Question(q: 'Airfrying is a hoax.', a: false),
+    Question(q: 'Piano is just a 72-piece drum set.', a: true)
   ];
+
+  Icon wrongAnswer = Icon(
+    Icons.close,
+    color: Colors.red,
+    semanticLabel: 'Text to announce in accessibility modes',
+  );
+
+  Icon rightAnswer = Icon(
+    Icons.check,
+    color: Colors.green,
+    semanticLabel: 'Text to announce in accessibility modes',
+  );
 
   int questionNumber = 0;
 
@@ -46,7 +66,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber],
+                questionBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -72,6 +92,15 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
+                bool correctAnswer =
+                    questionBank[questionNumber].questionAnswer;
+
+                if (true == correctAnswer) {
+                  scoreKeeper.add(rightAnswer);
+                } else {
+                  scoreKeeper.add(wrongAnswer);
+                }
+
                 setState(() {
                   questionNumber++;
                 });
@@ -93,6 +122,14 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
+                bool correctAnswer =
+                    questionBank[questionNumber].questionAnswer;
+
+                if (false == correctAnswer) {
+                  scoreKeeper.add(rightAnswer);
+                } else {
+                  scoreKeeper.add(wrongAnswer);
+                }
                 setState(() {
                   questionNumber++;
                 });
